@@ -1,0 +1,39 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local runtime data and secrets
+data/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+!.env.example
+logs/
+
+# Frontend dependencies and transient outputs
+node_modules/
+coverage/
+*.tsbuildinfo
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.temp
+
+# Local build/package artifacts
+backend/build/
+backend/dist/
+backend/dist-*/
+
+# Keep the embedded production frontend committed because FastAPI serves it.
+!backend/src/wechat_agent/web/dist/
+!backend/src/wechat_agent/web/dist/**

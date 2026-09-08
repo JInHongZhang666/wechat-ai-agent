@@ -1,0 +1,10 @@
+{
+  "name": "AI 信息小屋",
+  "short_name": "AI 小屋",
+  "description": "高质量 AI 信息分发与公众号内容生产工作台",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#10151c",
+  "theme_color": "#10151c",
+  "lang": "zh-CN"
+}

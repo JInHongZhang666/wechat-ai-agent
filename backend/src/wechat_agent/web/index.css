@@ -1,0 +1,5 @@
+/* AI 信息小屋 v2 — 样式入口 */
+@import './assets/design-tokens.css';
+@import './src/styles/layout.css';
+@import './src/styles/components.css';
+@import './src/styles/mobile.css';

@@ -1,0 +1,11 @@
+# AI 信息小屋
+
+AI 信息小屋提供高质量 AI 信息分发、证据包和公众号内容生产能力。
+
+- OpenAPI v1: /openapi-v1.json
+- Versioned API: /api/v1
+- Complete selected snapshot: /api/v1/selected/snapshot
+- Incremental selected changes: /api/v1/selected/changes
+- Selected RSS: /feed.xml
+- All-items RSS: /feed/all.xml
+- Daily RSS: /feed/daily.xml

@@ -1,0 +1,408 @@
+/* ═══════════════════════════════════════════════════════════════════
+   AI 信息小屋 v2 — Mobile: 移动端专属样式
+   匹配 AIHOT 430ead5ebdf751d4.css 移动端层
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Touch Targets ──────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .writer-studio { grid-template-columns: 280px minmax(0, 1fr); }
+  .writer-content-area > textarea { min-height: 420px; }
+  .opportunity-card { grid-template-columns: 30px minmax(0, 1fr); }
+  .opportunity-action { grid-column: 2; grid-template-columns: auto auto 1fr 1fr; align-items: center; }
+  .opportunity-action > strong, .opportunity-action > span { text-align: left; }
+  .creation-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .creation-projects {
+    position: static;
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .creation-panel-head {
+    display: none;
+  }
+
+  .creation-project-item {
+    min-width: 220px;
+    border-right: 1px solid var(--border-soft);
+    border-bottom: 0;
+  }
+
+  .evaluation-header,
+  .evaluation-save-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .evaluation-header-actions {
+    flex-wrap: wrap;
+  }
+
+  .evaluation-toolbar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .evaluation-mode-tabs {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .evaluation-mode-tabs button {
+    flex: 1 0 auto;
+  }
+
+  .evaluation-review-toolbar {
+    grid-template-columns: 1fr 1fr auto;
+  }
+
+  .evaluation-toolbar input {
+    grid-column: 1 / -1;
+  }
+
+  .evaluation-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .evaluation-list {
+    position: static;
+    display: flex;
+    max-height: none;
+    overflow-x: auto;
+  }
+
+  .evaluation-list-head {
+    display: none;
+  }
+
+  .evaluation-list-item {
+    min-width: 210px;
+    border-right: 1px solid var(--border-soft);
+    border-bottom: 0;
+  }
+
+  .evaluation-form {
+    grid-template-columns: 1fr;
+  }
+
+  .evaluation-field-wide {
+    grid-column: auto;
+  }
+
+  .evaluation-claim-card {
+    max-width: none;
+    margin: 10px 0;
+    padding: 16px;
+  }
+
+  .evaluation-progress-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .evaluation-locked-card {
+    max-width: none;
+    margin: 10px 0;
+    padding: 16px;
+  }
+
+  .evaluation-conflict-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feed-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .feed-navigation {
+    align-items: stretch;
+    flex-direction: column;
+    padding-bottom: 10px;
+  }
+
+  .category-tabs {
+    min-height: 44px;
+  }
+
+  .category-tab {
+    min-height: 44px;
+  }
+
+  .feed-navigation .feed-search {
+    flex-basis: auto;
+  }
+
+  .feed-search {
+    max-width: none;
+  }
+
+  .feed-window {
+    align-self: flex-end;
+    margin-left: 0;
+  }
+
+  .timeline-item {
+    --tl-time-w: 52px;
+    padding-bottom: 10px;
+  }
+
+  .timeline-time {
+    font-size: 11.5px;
+  }
+
+  .timeline-card {
+    padding: 10px 14px;
+  }
+
+  .side-link {
+    min-height: var(--touch-target);
+  }
+
+  .btn {
+    min-height: var(--touch-target);
+    padding: 8px 16px;
+  }
+
+  .field {
+    min-height: var(--touch-target);
+    font-size: 14px;
+  }
+
+  .hot-topics-row {
+    padding: 10px 14px;
+  }
+
+  .hot-topics-link {
+    font-size: 13px;
+  }
+
+  .ranking-page {
+    padding-top: 18px;
+  }
+
+  .ranking-hero h1 {
+    font-size: 38px;
+  }
+
+  .ranking-hero p {
+    font-size: 13px;
+  }
+
+  .ranking-row {
+    grid-template-columns: 32px minmax(0, 1fr) 52px;
+    gap: 9px;
+    padding: 12px 14px;
+  }
+
+  .ranking-trend {
+    display: none;
+  }
+
+  .daily-layout {
+    display: block;
+    min-height: 0;
+    margin: 0;
+  }
+
+  .daily-archive {
+    margin: 0 0 16px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .daily-archive-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+  }
+
+  .daily-month {
+    min-width: 230px;
+  }
+
+  .daily-report {
+    width: 100%;
+    padding: 26px 0 72px;
+  }
+
+  .daily-report-head h1 {
+    font-size: 27px;
+  }
+
+  .topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .topics-hero {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 22px 18px;
+  }
+
+  .topic-hero-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    min-width: 0;
+  }
+
+  .topics-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .topics-toolbar-meta {
+    align-self: flex-end;
+  }
+
+  .topic-group-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .writer-topbar { align-items: flex-start; flex-direction: column; }
+  .writer-top-actions { width: 100%; }
+  .writer-top-actions .btn { flex: 1; }
+  .writer-assistant-tip { align-items: flex-start; }
+  .writer-assistant-tip p { display: none; }
+  .writer-studio { grid-template-columns: 1fr; min-height: auto; }
+  .writer-settings-panel { position: static; }
+  .writer-editor-panel { min-height: 660px; }
+  .writer-field-grid { grid-template-columns: 1fr; }
+  .writer-editor-head, .writer-panel-title { min-height: 48px; }
+  .writer-title-area > label input { font-size: 16px; }
+  .writer-content-area > textarea { min-height: 400px; padding: 16px; font-size: 12px; }
+  .writer-markdown-preview { padding: 16px; }
+  .writer-editor-footer { align-items: stretch; flex-direction: column; }
+  .writer-editor-footer > .btn { width: 100%; }
+  .writer-document-meta { flex-wrap: wrap; }
+  .writer-quality-drawer > summary { align-items: flex-start; flex-direction: column; }
+  .writer-page-footer { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .profile-grid { grid-template-columns: 1fr; padding: 14px; }
+  .profile-grid label.is-wide { grid-column: auto; }
+  .author-input-form { grid-template-columns: 1fr; padding: 14px; }
+  .inspiration-entry-grid, .hot-inspiration-list { grid-template-columns: 1fr; }
+  .hot-inspiration-head { grid-column: 1; display: grid; }
+  .author-confirm { grid-column: auto; }
+  .opportunity-card { grid-template-columns: 1fr; }
+  .opportunity-rank { display: none; }
+  .opportunity-action { grid-column: auto; }
+  .opportunity-head { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .creation-hero {
+    padding: 22px 18px;
+  }
+
+  .creation-project-head,
+  .creation-card-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .creation-project-head .btn,
+  .creation-card-head .btn {
+    width: 100%;
+  }
+
+  .brief-form,
+  .draft-editor {
+    padding: 14px;
+  }
+
+  .creation-actions > span {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .topic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-card {
+    min-height: 126px;
+  }
+
+  .daily-highlights {
+    padding: 12px;
+  }
+
+  .daily-highlights-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* ── Safe Area ─────────────────────────────────────────────────── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .app-mobile-bar {
+    padding-top: calc(8px + env(safe-area-inset-top, 0px));
+  }
+
+  .app-main {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Writing workspace responsive rules. */
+@media (max-width: 960px) {
+  .writer-page.writer-workbench-theme {
+    height: auto;
+    min-height: calc(100vh - 76px);
+    padding: 0 10px;
+    overflow: visible;
+  }
+
+  .writer-workbench-theme .writer-topbar {
+    min-height: 54px;
+    flex: 0 0 54px;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .writer-workbench-theme .writer-header-identity > small { display: none; }
+  .writer-workbench-theme .writer-studio { grid-template-columns: 260px minmax(0, 1fr); min-height: 680px; }
+  .writer-workbench-theme .writer-editor-panel { min-height: 680px; }
+  .writer-workbench-theme .writer-edit-surface > textarea { min-height: 430px; }
+}
+
+@media (max-width: 700px) {
+  .writer-page.writer-workbench-theme { padding: 0 8px 14px; }
+  .writer-workbench-theme .writer-topbar { position: relative; gap: 8px; padding-right: 92px; }
+  .writer-workbench-theme .writer-header-identity h1 { font-size: 16px; white-space: nowrap; }
+  .writer-workbench-theme .writer-header-identity > span { display: none; }
+  .writer-workbench-theme .writer-top-actions { position: absolute; top: 12px; right: 6px; width: auto; margin-left: 0; }
+  .writer-workbench-theme .writer-top-actions .btn-link { display: none; }
+  .writer-workbench-theme .writer-top-actions .btn { min-height: 30px; flex: 0 0 auto; padding: 0 10px; }
+  .writer-workbench-theme .writer-assistant-tip { margin: 8px 2px; }
+  .writer-workbench-theme .writer-studio,
+  .writer-workbench-theme .writer-studio.is-settings-collapsed {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 0 2px;
+  }
+  .writer-workbench-theme .writer-settings-panel { height: auto; max-height: 540px; }
+  .writer-studio.is-settings-collapsed .writer-settings-panel { height: 48px; }
+  .writer-studio.is-settings-collapsed .writer-panel-title {
+    height: 48px;
+    padding: 0 14px;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .writer-studio.is-settings-collapsed .writer-panel-title > div { writing-mode: initial; }
+  .writer-studio.is-settings-collapsed .writer-panel-title small { display: inline; }
+  .writer-workbench-theme .writer-editor-panel { height: 720px; min-height: 720px; }
+  .writer-workbench-theme .writer-editor-head { flex: 0 0 44px; min-height: 44px; }
+  .writer-workbench-theme .writer-editor-toolbar { overflow-x: auto; flex-wrap: nowrap; }
+  .writer-workbench-theme .writer-inline-title { margin: 0 14px; font-size: 15px; }
+  .writer-workbench-theme .writer-edit-surface > textarea { min-height: 430px; padding: 13px 14px 20px; }
+  .writer-workbench-theme .writer-editor-footer { align-items: center; flex-direction: row; overflow-x: auto; }
+  .writer-workbench-theme .writer-editor-footer > div { flex-wrap: nowrap; }
+  .writer-workbench-theme .writer-editor-footer button { white-space: nowrap; }
+  .writer-workbench-theme .writer-quality-drawer > summary { align-items: center; flex-direction: row; }
+  .writer-workbench-theme .writer-page-footer { align-items: flex-start; min-height: 38px; flex-direction: column; justify-content: center; gap: 2px; }
+}

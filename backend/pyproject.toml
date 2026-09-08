@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wechat-ai-agent"
+version = "1.0.0"
+requires-python = ">=3.12"
+dependencies = [
+  "apscheduler>=3.10,<4",
+  "fastapi>=0.115,<1",
+  "httpx>=0.28,<1",
+  "motor>=3.6,<4",
+  "openai>=1.0,<2",
+  "pydantic>=2.10,<3",
+  "sqlalchemy>=2.0,<3",
+  "uvicorn>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1,<2",
+  "pytest>=8,<9",
+  "pytest-asyncio>=0.25,<1",
+  "wheel>=0.45,<1",
+]
+
+[project.scripts]
+ai-cabin-eval = "wechat_agent.evaluation.__main__:main"
+
+[tool.setuptools.package-data]
+wechat_agent = [
+  "web/*.html",
+  "web/*.txt",
+  "web/*.webmanifest",
+  "web/assets/*",
+  "web/dist/*.html",
+  "web/dist/*.txt",
+  "web/dist/*.webmanifest",
+  "web/dist/assets/*",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

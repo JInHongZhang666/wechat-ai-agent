@@ -1,0 +1,2920 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-11T16:09:02.659170+00:00",
+  "mode": "deterministic",
+  "runtime": {
+    "model": null,
+    "promptVersion": null,
+    "tokenCount": 0,
+    "estimatedCost": 0
+  },
+  "strategyVersion": "distribution-v3.2",
+  "sampleCount": 200,
+  "groupCount": 26,
+  "metrics": {
+    "relevance": {
+      "truePositive": 91,
+      "falsePositive": 88,
+      "falseNegative": 3,
+      "trueNegative": 18,
+      "precision": 0.5084,
+      "recall": 0.9681,
+      "f1": 0.6667,
+      "accuracy": 0.545
+    },
+    "selection": {
+      "truePositive": 42,
+      "falsePositive": 15,
+      "falseNegative": 35,
+      "trueNegative": 108,
+      "precision": 0.7368,
+      "recall": 0.5455,
+      "f1": 0.6269,
+      "accuracy": 0.75
+    },
+    "category": {
+      "accuracy": 0.4787,
+      "macroF1": 0.2262,
+      "perCategory": {
+        "ai-models": {
+          "truePositive": 4,
+          "falsePositive": 8,
+          "falseNegative": 7,
+          "trueNegative": 75,
+          "precision": 0.3333,
+          "recall": 0.3636,
+          "f1": 0.3478,
+          "accuracy": 0.8404
+        },
+        "ai-products": {
+          "truePositive": 0,
+          "falsePositive": 12,
+          "falseNegative": 8,
+          "trueNegative": 74,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.7872
+        },
+        "industry": {
+          "truePositive": 40,
+          "falsePositive": 11,
+          "falseNegative": 28,
+          "trueNegative": 15,
+          "precision": 0.7843,
+          "recall": 0.5882,
+          "f1": 0.6723,
+          "accuracy": 0.5851
+        },
+        "paper": {
+          "truePositive": 0,
+          "falsePositive": 5,
+          "falseNegative": 3,
+          "trueNegative": 86,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "accuracy": 0.9149
+        },
+        "tip": {
+          "truePositive": 1,
+          "falsePositive": 13,
+          "falseNegative": 3,
+          "trueNegative": 77,
+          "precision": 0.0714,
+          "recall": 0.25,
+          "f1": 0.1111,
+          "accuracy": 0.8298
+        }
+      }
+    }
+  },
+  "mismatchCount": 155,
+  "mismatches": [
+    {
+      "articleId": "feed-e299630b866e2d7ebb7f",
+      "title": "Ten advances in mathematics and theoretical computer science",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false,
+        "score": 69.32
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-09a88f44ced189920a9b",
+      "title": "AI Gateway now supports team and project spend budgets",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 58.44
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-7e5e1e8610f9c5a97fc4",
+      "title": "Stacked sessions and pull requests in the GitHub Copilot app",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true,
+        "score": 67.62
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-b70a57a46cbacfd30ddc",
+      "title": "Is paying artists enough to convince them to embrace AI?",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 60.89
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-c3bebe660fba0007a70b",
+      "title": "「天线宝宝」机器人上门做保洁，200元/小时，纯·人工·智能",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 65.78
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-da425c76a8c018d071b2",
+      "title": "How avatarin built a 24/7 retail agent with GPT-Realtime",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "tip",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-f8ec64126bdac17b3b31",
+      "title": "Advancing responsible AI across Europe",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true,
+        "score": 68.82
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-fc8ae8125ffc95278d24",
+      "title": "DeepSeek V4 Flash now runs updated weights on AI Gateway",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.89
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-859cdcef3df01ae8d929",
+      "title": "GPU Management: Why Idle GPUs Are the New Grounded Aircraft",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "tip",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-599046112a956b3b2ccf",
+      "title": "获奖之后，王虹最想感谢的人",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 65.77
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-fe470f21b2646aa35aa8",
+      "title": "Open letters about AI development",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": true,
+        "score": 60.4
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-265c6a0134aba9b6d5ff",
+      "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-966cd163f8692d8ca443",
+      "title": "Building abundant intelligence",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false,
+        "score": 68.82
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-e25b6cfff4f767d96843",
+      "title": "Expanded search for workflow runs in Vercel Observability",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-9c980868c23ca002eb7f",
+      "title": "The OlmoEarth Platform: Geospatial inference at planetary scale",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-eb2b47d50db42393af0a",
+      "title": "July 2026 newsletter",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 60.4
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-47da73cdc4f72b4cf63e",
+      "title": "Accelerating scientific discovery with ChatGPT for Academic Researchers",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-cd88270c00622dafecb0",
+      "title": "Univé builds an AI-ready workforce",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false,
+        "score": 68.37
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-a049d55f42426e2e43e6",
+      "title": "AI Gateway adds unified fast mode support",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-a5bc54280bf29efc8ba4",
+      "title": "LFM2.5-Encoders for Fast Long-Context Inference on CPU",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-093876cce3423ed0adbc",
+      "title": "长城魏牌 V9X 首次 OTA：新增小魏同学 Agent 可自然对话、多指令车控",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 60.61
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-d7b559dc833a7edf7fef",
+      "title": "OpenAI前员工刚跑路就喊话：要套现就赶紧套，别等IPO！",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 65.46
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-9d04b3a9a2417e2bf2db",
+      "title": "Quoting Greg Brockman",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 60.08
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-ff7c1653ce2eb767fcfc",
+      "title": "Disrupting a Criminal Scam Operation",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false,
+        "score": 67.98
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-906859478cca8a0ac628",
+      "title": "Vercel Passport is now generally available",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-fda5bd9ca453ecca3aa9",
+      "title": "The harness is all you need (mostly)",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-19b6bfe087d13233a756",
+      "title": "Snapchat 平台宣布打击低质量 AI 内容，完全由 AI 生成的视频将不会被算法推荐",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.6
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-d9e416905ea07e6c58cd",
+      "title": "李飞飞World Labs收购SceniX，物理AI训练正从“采数据”走向“造世界”",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 65.45
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-453d766c216078df2408",
+      "title": "datasette-apps 0.2a0",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 60.02
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-models",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-824b5ba22f1e74f57103",
+      "title": "Scientific computing in the age of agentic AI",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "paper",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-8e9ccd26f3f6c6abf803",
+      "title": "10x more capacity for Laguna S 2.1 on AI Gateway",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-6d622f24858d7f9d6b05",
+      "title": "国家超算互联网上线 DeepSeek-V4-Flash 正式版 API，一键接入即可快速调用",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.59
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-518c46c1375437aa89f7",
+      "title": "Ten advances in mathematics and theoretical computer science",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 59.97
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-48a49f67e61ee4b11090",
+      "title": "Fantasy Premier League Companion gives managers a new tool for success",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-81a406e12160284a78ca",
+      "title": "Chat SDK now supports reactions and ephemeral messages on Teams",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-c32876fb01e7c58f1370",
+      "title": "首届全国青少年人工智能大赛决赛上海开赛，设 5 大前沿赛道",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 60.58
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-1cafe33dd1ecefaf56cb",
+      "title": "在流媒体时代，搭建一个专属于自己的「音乐探索系统」",
+      "fields": [
+        "relevant",
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": false,
+        "category": "tip",
+        "selected": false,
+        "score": 57.23
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-7c75aaccc41e5ceac5b6",
+      "title": "Coding Agents Don’t Need Bigger Context Windows — They Need a Context Compiler",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 59.66
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-db9d0913513df69e6eee",
+      "title": "How AI is expanding what people do at work",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": false,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-28a0859f6545728f4e5d",
+      "title": "Vercel MCP now supports the 2026-07-28 MCP specification",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-71219884612b1b532b5a",
+      "title": "长三角（嘉兴）Token 运营中心启动，DeepSeek、千问等 100 余款大模型可选",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.62
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-eefa2e04fb2b8bac97e8",
+      "title": "Put the Agent Inside the Workflow",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 59.55
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-1e19008dd40a8d8adb68",
+      "title": "AI Gateway logs now have a dedicated page",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-0aadf05b18e75c665f31",
+      "title": "苹果称 MacBook Neo 正助力美国学校替换 Windows 和 Chromebook",
+      "fields": [
+        "relevant",
+        "category"
+      ],
+      "prediction": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false,
+        "score": 60.87
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-d1f717bbd3e87f89c45b",
+      "title": "中国 AI 大模型领跑全球榜单，央视详解背后的优势所在",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.62
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-95185cf91586e5d42fcf",
+      "title": "deepseek-ai/DeepSeek-V4-Flash-0731",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.83
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-92a3374124a5ab4f8e91",
+      "title": "Server-Timing response headers will pass through to the client",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-7941be664014eeb46fe8",
+      "title": "因 AI 生成大量低质漏洞报告，苹果限制安全研究人员漏洞提交数量",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.62
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-6663cb7fa838dda52abd",
+      "title": "Stateless MCP has recaptured my interest (and inspired mcp-explorer and datasette-mcp)",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.79
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-989dcdc8f13fc67f041e",
+      "title": "GitHub Copilot app for Beginners: Getting started",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-fe235c320ec7f5931258",
+      "title": "2026 年科技行业裁员潮加剧：前七个月裁员人数已超 2025 全年，AI 投资却持续狂飙",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.65
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-07b8466a242f0fb16191",
+      "title": "llm-mcp-client 0.1a0",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.78
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-96537f9acc12bc3d68e6",
+      "title": "NVIDIA Cosmos-H-Dreams: Bringing Real-Time Generative Simulation to Surgical Robotics",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-1daa0cb290c45dfeedc3",
+      "title": "因使用月之暗面模型写代码，美国最大外卖平台 DoorDash 被议员调查",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false,
+        "score": 60.78
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-a0cfd36364fd2ee4d82e",
+      "title": "Oxide and Friends: The Open Weight Revolution with Simon Willison",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.69
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-8088c1dfd69d52169d26",
+      "title": "Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true,
+        "score": 67.5
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-5fb6e531e0d17716fd79",
+      "title": "谷歌 Gemini Spark 智能体对全球更多用户开放，支持订机票、整理收件箱等操作",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.64
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-59c692b9d0ccdcdf9f22",
+      "title": "smevals - a small eval suite for evaluating models, prompts, and harnesses",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.68
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-0772f113c508a9a72ae3",
+      "title": "初创公司 Majestic 推出 AI 服务器“普罗米修斯”，可选配 8TB-128TB LPDDR6 内存",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.68
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-b940b64d997f8620b826",
+      "title": "Slack Emoji Maker",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.63
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-7ae0887fde6caf20b937",
+      "title": "说唱歌手 Fenix Flexin 单曲《Rubberz》走红，被质疑由 AI 生成",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 60.67
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-8f35a353da56a7df71c2",
+      "title": "The 3× Token Bill We Didn’t See Coming",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.41
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-7ee7eeb44b3617274067",
+      "title": "When the Code Becomes the CEO: Why Your Next Manager Might Be a Decentralized Agentic Loop",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.33
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-a2271f06d37ea936be94",
+      "title": "datasette-agent 0.4a0",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.29
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-560bf14d7e29f40495a2",
+      "title": "How to Debug AI Coding Agents When They Change the Wrong Thing",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.25
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-878680190e353cf1b201",
+      "title": "法官驳回 xAI 诉求，明尼苏达州 AI“脱衣”应用禁令将如期生效",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.68
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-1e544c728dc16e305447",
+      "title": "How Benders Decomposition Works Part I: Optimality Cuts",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 58.16
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-3feeecf84fa6f882381e",
+      "title": "App+1 | 诗经山河图：我用 AI 做了一张《诗经》地图",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.89
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-08757063dc3799b8de5d",
+      "title": "珍稀图书遭粉碎用于 AI 训练引众怒，图书数据库 ISBNdb 下架 AI 相关测试页面",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.73
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-7bc027728ff8ee44826d",
+      "title": "Advancing the price-performance frontier with GPT‑5.6",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.5
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-7c4f61301b3753094494",
+      "title": "Investigating three real-world incidents in our cybersecurity evaluations",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.48
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-16657117b75dcddd9880",
+      "title": "Is this Billboard Hot 100 hit AI slop?",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 59.85
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-31c91c487dcc06ec0e3b",
+      "title": "llm 0.32rc2",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.43
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-1b97e3bd07cf2daf5460",
+      "title": "环球、索尼、华纳等多家唱片公司提议将低质 AI 音乐从排行榜中剔除",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 60.17
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-4aec8be12cee60237b13",
+      "title": "Quoting Bruce Schneier",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.8
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-bfe58c01618e2f7774de",
+      "title": "cocofhu/approving",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 58.97
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-1b9b2744b70e393bec6f",
+      "title": "7 States’ Water Systems Hit by Cyberattacks Likely Tied to Iran",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 59.41
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-ddd378329dbe03844107",
+      "title": "The Python Ecosystem That Changed AI Development",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.08
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-c8cdfd360cc42f4795a6",
+      "title": "llm-chat-completions-server 0.1a0",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.65
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-f0e463449b7c4adfb250",
+      "title": "How to Organize All of Your Coding Agent Tasks",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-c12c1ffa95fb1e41bd8f",
+      "title": "Anthropic模型，也失控了。。。",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 65.37
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-3905b46ddc1b95b6f475",
+      "title": "How to Build a Context Layer and a Company Brain",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-fffe01105bf6251c17d4",
+      "title": "A Simplified View of the Jacobian Conjecture",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 57.03
+      },
+      "label": {
+        "relevant": false,
+        "category": "paper",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-a012a4c93429343e30d1",
+      "title": "makecindy/cindy",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-b55cc15c7160d8c76b0c",
+      "title": "Chinese AI Researchers Are Finding Their Voice on X",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 58.51
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-ef482ccc1510953f7b3b",
+      "title": "krakonjac300-pixel/podcast-shorts-factory",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-a251e57ac9076fe57f1f",
+      "title": "Here’s the problem with putting an AI image generator in Google Earth",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 58.45
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "github-55b94dab049d35ae5792",
+      "title": "jesseoue/opencode-configs",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-61b610982fb1a23e93ea",
+      "title": "The major labels propose rules to keep AI slop off the charts",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 58.42
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-231f88c29d95c2606004",
+      "title": "surya-koritala/sigbound",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-d2ecb144a16331cef43e",
+      "title": "AI Slop Melodramas Are Taking Over X—and Their Creators Are Cashing In",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 58.33
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-ce0d4f5dd54e4a2897b5",
+      "title": "Jane-o-O-o-O/grok-build-desktop",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-8db4143e3610430783e7",
+      "title": "This AI Assistant Wants to Make Up for Your Boyfriend’s Incompetence",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 58.32
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "github-112d3f41849feb8c933d",
+      "title": "risa-labs-inc/BossConsole",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-13380feffaa4ee7b53a0",
+      "title": "It’s time to panic about AI safety",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 58.28
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-7162d46612c5cac6a164",
+      "title": "powerycy/goutoujunshi",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-958fb2c086fd4db5fe5b",
+      "title": "Anthropic says Claude accidentally hacked real companies too",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 58.26
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-fd662728f1a366e8f78e",
+      "title": "TryCaspian/caspian-sdk",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "tip",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-8d107641fcf45ba83994",
+      "title": "djfksjd/sole-search",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-fccabe76d3ae660c3e00",
+      "title": "刚刚，即梦 Seedance 2.5来了！我狂测测测测……",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 64.34
+      },
+      "label": {
+        "relevant": true,
+        "category": "paper",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "github-6e1fbb0be61c8a522ffe",
+      "title": "ailinone/collective-intelligence",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-8d12a5697371964d39b6",
+      "title": "Anthropic Says Claude Hacked Into 3 Organizations During Cybersecurity Tests",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.58
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-721fdb2dde4cb964a177",
+      "title": "NullLabTests/software-periodic-table",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-7e27e30e057a78c390be",
+      "title": "Tim Cook hints at iCloud Plus tier for AI power users",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.41
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-980f45b3cc4350b0f764",
+      "title": "ianustec/neura-office",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-cc7448ef4b1d255a771d",
+      "title": "The loss of Situational Awareness",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.32
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "github-ad1c7cda60294e84453b",
+      "title": "smixs/mentor",
+      "fields": [
+        "selected",
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-1fd4e792714cb816a6bb",
+      "title": "Everyone Is Freaking Out About OpenAI and Anthropic’s Race for Dominance",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.29
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "github-7e9bf1e27bef9faec94d",
+      "title": "Prism-Shadow/penguin-harness",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-5df6cbdbbfce999bdfb4",
+      "title": "LinkedIn actually adds a ‘seems like AI slop’ button",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.2
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "github-d812a741f1d3c2838f1c",
+      "title": "levi-qiao/octopus-skill",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-e45a18608564dd88a669",
+      "title": "Nvidia’s Open Source Alliance Is Missing Some Key Names: OpenAI and Anthropic",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.16
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-59d1112174bf62f0aa5a",
+      "title": "Google DeepMind’s new AI model can control a robot’s entire body",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.24
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-e0126cf71b23cd909c94",
+      "title": "Chrome Needs Twice-a-Week Patching Thanks to AI Bug Hunting",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.11
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-8111c47017bfd595a25e",
+      "title": "The New Friend AI Pendant Can Now Talk Back to You",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.57
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-225e2d51285545308c3a",
+      "title": "The Vanishing Page: AI Firms Scan Then Destroy Rare Book Editions",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-96f5dc656a14a806246f",
+      "title": "Bringing Nunchaku 4-bit Diffusion Inference to Diffusers",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-932591afba7f1cf55372",
+      "title": "How news organizations are using AI to advance their vital missions",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-082c4173c70b04519142",
+      "title": "Building AI infrastructure with the Effingham County community",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-577ddf6b90e6d70b4338",
+      "title": "Advancing the next era of national science",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-91a5b7c5572d91400af0",
+      "title": "The State of Simulation for Physical AI: An Overview",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-3ac65a5d9987462de20f",
+      "title": "How to build interactive experiences with canvases",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-d925d8c91f460a44f070",
+      "title": "OpenAI and Hugging Face partner to address security incident during model evaluation",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-8549f9ed22c455abd8a6",
+      "title": "Grabette: an open system to record robot-manipulation data",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-69e481323262afa1b521",
+      "title": "David Vélez and Robin Vince join the boards of the OpenAI Foundation and OpenAI Group PBC",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-a5ab872c216c2f944ec7",
+      "title": "Safety and alignment in an era of long-horizon models",
+      "fields": [
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-34ee2c0fc6ac46c2a72f",
+      "title": "Qwen 3.8 Max now available on Vercel AI Gateway",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": false,
+        "score": 59.49
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-829a6ea3e79dcfb7fdc7",
+      "title": "阿里企业级 Agent 产品“千问办公”开启公测，集成最新旗舰模型 Qwen3.8",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 61.0
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-products",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-7d504dd4629ac9aed0ad",
+      "title": "派早报：DeepSeek V4 Flash 正式版发布",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": true,
+        "score": 60.76
+      },
+      "label": {
+        "relevant": true,
+        "category": "ai-models",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-76a4c194005a7e6179ad",
+      "title": "condense-json 1.0",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false,
+        "score": 60.73
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-3d0da76d249c97cd097f",
+      "title": "小米智能摄像机 4 Max AI 变焦版发售：12Mp 长焦 + 8Mp 广角、支持 AI 看护，799 元",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 60.94
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-d08da11fce2c4128e817",
+      "title": "How to Apply Coding Agents to Non-Programming Tasks",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "tip",
+        "selected": true,
+        "score": 60.32
+      },
+      "label": {
+        "relevant": false,
+        "category": "tip",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-ed64d71c0447b2d0ad88",
+      "title": "华为半导体首席科学家廖恒罕见受访：首提芯片“18 层宝塔”理论，大赞 DeepSeek 梁文锋",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.93
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-7586abe59beb86f19c15",
+      "title": "赶超 NVIDIA：传闻谷歌规划 2028 年部署 1200~1500 万颗 TPU v9 AI 芯片",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 60.87
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-7dcfc15314548659875e",
+      "title": "经济学家汉克：AI 成本极高，难以大规模取代人力",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.79
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-93247f3782b40ca5ef85",
+      "title": "Fender’s CEO seems to think your bandmates are just analog AI",
+      "fields": [
+        "relevant",
+        "selected"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true,
+        "score": 60.58
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-45b6f101ee8ef17ebe14",
+      "title": "联发科：第二款 AI ASIC 加速器有望 2028 年量产，英特尔代工 EMIB 进展良好",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 61.0
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "hn-49122655",
+      "title": "Autoregressive Language Model on the 6502 Processor",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false,
+        "score": 57.51
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-e2ebf2157113b3d94adb",
+      "title": "OpenClaw and Ollama in Agentic AI: Toward Fully Autonomous and Scalable AI Agent Systems",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-fe633bd4bb155014bf02",
+      "title": "The Formalism Trap: Are LLM-as-a-Judge Evaluators Blinded by Consensus Mimicry under Social Load?",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "tip",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-d8a484f05c50af97e586",
+      "title": "TokenSwap: Benchmarking and Reducing the Modality Gap in Multimodal LLMs",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-fd6616bdde03f263e5b7",
+      "title": "SciToolAgent-Evo: An Ontology-Aware Self-Evolving Agent for Open-World Scientific Tool Acquisition",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": true,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-d8736d8d9e30c80053ee",
+      "title": "ThinkReset: Learnable Intermediate Interface Construction for Bounded-Context Long-Horizon Reasoning",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-f83fdbe042e6dcf62c92",
+      "title": "Library Reachability in LSR-Synth: How Anti-Memorization Design Changes the Measurement of Symbolic Discovery",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-cdd1120dc63d166c0807",
+      "title": "Imbalanced Data Clustering via Targeted Data Augmentation Using GMM and LLM",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-f1f390941d86875c70c5",
+      "title": "FocusGS: Spatial Delta Layers for Local Repair and Deterministic Editing of Trained 3D Gaussian Assets",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": true,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-cdba9d815b793e3f83c2",
+      "title": "TELLER: Dual-Path Iterative Preference Optimization for Table Entity Linking",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-eaaa4491b4b90b7b0a86",
+      "title": "Best Friends, Not Forever: Evaluating Long-Horizon Persona Collapse and Behavioral Drift in AI Companions",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": true,
+        "category": "tip",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-cacad6db20c32f46448e",
+      "title": "Chain-of-Models: Cross-Model Auditing for Bias-Robust LLM Judges",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-c07c07c6574b8e2136b9",
+      "title": "Multi-Agent Planning with Spatio-Temporal and Topological Constraints using STL-GO",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-bf17a445cb2b6eb69192",
+      "title": "Evaluating Federated Pre-Training: On the Reliability of Downstream Fine-Tuning and Intrinsic Evaluation",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": true,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": true
+      }
+    },
+    {
+      "articleId": "feed-b65d0c90aa80fed82c3d",
+      "title": "LLM Framework for Discovering Major Mathematical Conjectures: AI's Quest for the Next Riemann Hypothesis",
+      "fields": [
+        "category"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": true,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-b4dc7dd9cf90bc1de413",
+      "title": "Uncertainty-Aware Deepfake Detection via Multi-View Structural Learning",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "ai-products",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-b25ac012f410e958ff55",
+      "title": "Learning Stateful Predictive Knowledge From Experience",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    },
+    {
+      "articleId": "feed-ac17f84c34971327e7aa",
+      "title": "SCMA: Structure-Conditioned and Metal-Aware Flow Matching for CT Metal Artifact Reduction",
+      "fields": [
+        "relevant"
+      ],
+      "prediction": {
+        "relevant": true,
+        "category": "paper",
+        "selected": false,
+        "score": 71.46
+      },
+      "label": {
+        "relevant": false,
+        "category": "industry",
+        "selected": false
+      }
+    }
+  ]
+}

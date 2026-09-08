@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "AI 信息小屋",
+  "name_for_model": "ai_cabin",
+  "description_for_human": "高质量 AI 信息分发与公众号内容生产工作台",
+  "description_for_model": "Use the stable anonymous read-only API v1 for curated AI items, current hot topics, daily reports, categories, durable selected-set snapshot/changes synchronization, and data freshness checks. Use snapshot/changes only for a persistent complete selected mirror. Content-production workflows remain in the local workbench and are not part of this public contract.",
+  "auth": {"type": "none"},
+  "api": {"type": "openapi", "url": "/openapi-v1.json"},
+  "logo_url": "",
+  "contact_email": "",
+  "legal_info_url": ""
+}

@@ -1,0 +1,190 @@
+/* Design Token base — shared with backend design system */
+@import '../../../backend/src/wechat_agent/web/assets/design-tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────────────────────────── */
+
+body {
+  @apply text-ink min-h-screen;
+  background:
+    radial-gradient(circle at 8% 4%, rgba(15, 107, 83, .12), transparent 24rem),
+    linear-gradient(180deg, #faf7ef 0, #f5f1e8 100%);
+}
+
+/* ── Score badges ─────────────────────────────────────────────────── */
+
+.score-high {
+  color: var(--accent-emerald);
+  font-weight: 800;
+}
+
+.score-mid {
+  color: var(--accent-amber);
+  font-weight: 700;
+}
+
+.score-low {
+  color: var(--text-2);
+  font-weight: 600;
+}
+
+/* ── Tier badges ──────────────────────────────────────────────────── */
+
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tier-badge--t1 {
+  background: var(--accent-emerald);
+  color: var(--accent-emerald-fg);
+}
+
+.tier-badge--t1_5 {
+  background: var(--accent-cyan);
+  color: var(--accent-cyan-fg);
+}
+
+.tier-badge--t2 {
+  background: var(--surface-2);
+  color: var(--text-2);
+}
+
+/* ── Read-state tracking ──────────────────────────────────────────── */
+
+.fc-read {
+  opacity: 0.5;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+
+.fc-read:hover {
+  opacity: 0.75;
+}
+
+/* ── Skeleton loading ─────────────────────────────────────────────── */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-2) 0px,
+    var(--surface-3) 200px,
+    var(--surface-2) 400px
+  );
+  background-size: 600px;
+  animation: skel 1.5s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Timeline card (AIHOT-style) ──────────────────────────────────── */
+
+.timeline-card {
+  position: relative;
+  padding-left: calc(var(--tl-time-w, 110px) + var(--space-4));
+  border-bottom: 1px solid var(--border-soft);
+  transition: background var(--dur-fast) var(--ease-out);
+  animation: feed var(--dur-enter) ease-out both;
+}
+
+.timeline-card:hover {
+  background: var(--surface-card-hover);
+}
+
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  left: var(--tl-time-w, 110px);
+  top: 0;
+  bottom: 0;
+  width: var(--tl-rail-w, 2px);
+  background: var(--border-soft);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: calc(var(--tl-time-w, 110px) - 5px);
+  top: var(--tl-dot-top, 1.25rem);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tl-accent, var(--theme-accent));
+  border: 2px solid var(--bg-0);
+  z-index: 1;
+}
+
+.timeline-time {
+  position: absolute;
+  left: 0;
+  top: var(--tl-dot-top, 1.25rem);
+  width: calc(var(--tl-time-w, 110px) - var(--space-3));
+  font-size: var(--text-size-xs);
+  color: var(--text-2);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ── Hot topics ───────────────────────────────────────────────────── */
+
+.hot-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+}
+
+.hot-topic-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  font-size: var(--text-size-sm);
+  color: var(--text-1);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.hot-topic-chip:hover {
+  background: var(--surface-3);
+  border-color: var(--theme-accent);
+  color: var(--text-0);
+}
+
+.hot-topic-chip .signal-count {
+  font-size: var(--text-size-xs);
+  color: var(--text-2);
+  background: var(--surface-1);
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+/* ── Panel (matching existing pattern) ────────────────────────────── */
+
+.panel {
+  @apply border border-[#eee9dd] rounded-[22px] bg-surface shadow-card overflow-hidden;
+}
+
+.panel-head {
+  @apply flex items-center justify-between py-4 px-[22px] border-b border-[#eee9dd];
+}
+
+.panel-head h3 {
+  @apply font-extrabold m-0;
+}
+
+/* ── Empty state ───────────────────────────────────────────────────── */
+
+.empty-state {
+  @apply p-8 text-center text-muted leading-relaxed flex items-center justify-center;
+}
