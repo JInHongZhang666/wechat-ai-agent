@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import os
 
+from wechat_agent.collectors.aihot import AihotCollector
 from wechat_agent.collectors.base import SourceTier
 from wechat_agent.collectors.bing_wechat import BingWeChatCollector
 from wechat_agent.collectors.github_releases import GitHubReleaseCollector
@@ -96,6 +97,35 @@ def build_default_live_collector() -> LiveRadarCollector:
         *models_t1, *products_t1, *industry_sources,
         *paper_sources, *tip_sources,
     ]
+
+    # Optional, isolated external discovery source. AIHOT candidates still pass
+    # through the same local deduplication, pre-screening, scoring and curation
+    # pipeline as every other collector. Remove this block and the import above
+    # to remove ingestion without touching the conversational Agent extension.
+    if os.getenv("WECHAT_AGENT_AIHOT_INGEST_ENABLED", "1").lower() in {
+        "1", "true", "yes", "on",
+    }:
+        try:
+            aihot_limit = int(os.getenv("WECHAT_AGENT_AIHOT_INGEST_LIMIT", "100"))
+        except ValueError:
+            aihot_limit = 100
+        aihot_limit = min(100, max(1, aihot_limit))
+        aihot_mode = os.getenv("WECHAT_AGENT_AIHOT_INGEST_MODE", "all").lower()
+        if aihot_mode not in {"all", "selected"}:
+            aihot_mode = "all"
+        try:
+            aihot_timeout = float(
+                os.getenv("WECHAT_AGENT_AIHOT_INGEST_TIMEOUT_SECONDS", "12")
+            )
+        except ValueError:
+            aihot_timeout = 12.0
+        collectors.append(
+            AihotCollector(
+                build_http_client(max(1.0, aihot_timeout)),
+                mode=aihot_mode,
+                limit=aihot_limit,
+            )
+        )
 
     # ═══════════════════════════════════════════════════════════════
     # Optional: Bing WeChat public index (T2)

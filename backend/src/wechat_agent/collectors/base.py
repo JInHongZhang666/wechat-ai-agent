@@ -123,12 +123,17 @@ def _retry_after_seconds(response: httpx.Response) -> int | None:
 def merge_by_url(
     groups: Sequence[Sequence[ArticleRecord]],
 ) -> tuple[ArticleRecord, ...]:
-    """Keep the newest collected version of each canonical public URL."""
+    """Keep one version of each canonical public URL.
+
+    Direct collectors take precedence over the optional AIHOT discovery
+    channel. Within the same provenance class, retain the newest collected
+    version as before.
+    """
     by_url: dict[str, ArticleRecord] = {}
     for group in groups:
         for article in group:
             existing = by_url.get(article.source_url)
-            if existing is None or article.collected_at >= existing.collected_at:
+            if existing is None or _prefer_article(article, existing):
                 by_url[article.source_url] = article
     return tuple(
         sorted(
@@ -137,3 +142,11 @@ def merge_by_url(
             reverse=True,
         )
     )
+
+
+def _prefer_article(candidate: ArticleRecord, existing: ArticleRecord) -> bool:
+    candidate_is_aihot = candidate.source_id == "aggregator:aihot"
+    existing_is_aihot = existing.source_id == "aggregator:aihot"
+    if candidate_is_aihot != existing_is_aihot:
+        return not candidate_is_aihot
+    return candidate.collected_at >= existing.collected_at

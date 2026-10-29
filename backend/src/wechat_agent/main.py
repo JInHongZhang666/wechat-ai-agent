@@ -17,6 +17,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from wechat_agent.api.errors import AppError, app_error_handler, problem_response
+from wechat_agent.api.agent import create_agent_router
 from wechat_agent.api.evaluation import create_evaluation_router
 from wechat_agent.api.story_shadow import (
     StoryShadowResources,
@@ -31,6 +32,7 @@ from wechat_agent.api.observability import (
 )
 from wechat_agent.api.public_openapi import build_public_v1_openapi
 from wechat_agent.api.v1_routes import create_v1_router
+from wechat_agent.api.video import create_video_router
 from wechat_agent.services.scheduler import create_scheduler
 from wechat_agent.services.daily import (
     REPORT_TIMEZONE,
@@ -82,6 +84,7 @@ from wechat_agent.writing.provider import (
     LlmDraftProvider,
     RuleBasedDraftProvider,
 )
+from wechat_agent.video import VideoAnalysisService, VideoConfig
 
 
 def create_app(
@@ -106,6 +109,7 @@ def create_app(
         / "acceptance_articles.json"
     )
     scheduler = create_scheduler()
+    video_service = VideoAnalysisService(VideoConfig.from_env())
 
     @asynccontextmanager
     async def lifespan(_app: FastAPI):
@@ -151,6 +155,7 @@ def create_app(
             yield
         finally:
             scheduler.stop()
+            video_service.close()
 
     app = FastAPI(
         title="AI 信息小屋 · AI 内容智能体",
@@ -368,10 +373,17 @@ def create_app(
         return StoryShadowResources(story_repository, story_shadow_service)
 
     app.include_router(create_router(get_service))
+    app.include_router(create_agent_router(get_service))
     app.include_router(create_v1_router(get_service))
     app.include_router(create_feed_router(get_service))
     app.include_router(create_evaluation_router(get_evaluation_service))
     app.include_router(create_story_shadow_router(get_story_shadow_resources))
+    app.include_router(
+        create_video_router(
+            lambda: video_service,
+            lambda: get_service()._llm_config,
+        )
+    )
 
     # Register AppError handler (Problem JSON protocol)
     app.add_exception_handler(AppError, app_error_handler)

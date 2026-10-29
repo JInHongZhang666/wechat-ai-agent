@@ -1,0 +1,25 @@
+{
+  "evaluated_at": "2026-10-29",
+  "agent_tests": {"passed": 39, "failed": 0, "duration_seconds": 9.01},
+  "full_suite": {"passed": 421, "failed": 0, "duration_seconds": 147.38},
+  "representative_cases": [
+    {"id": "T01", "case": "broad_request_defaults_to_7d", "result": "passed"},
+    {"id": "T02", "case": "replan_after_empty_observation", "result": "passed"},
+    {"id": "T03", "case": "clarification_hidden_and_search_retried", "result": "passed"},
+    {"id": "T04", "case": "conversation_inherits_prior_topic", "result": "passed"},
+    {"id": "T05", "case": "invalid_tool_arguments_blocked", "result": "passed"},
+    {"id": "T06", "case": "unknown_tool_blocked", "result": "passed"},
+    {"id": "T07", "case": "malformed_json_can_be_corrected", "result": "passed"},
+    {"id": "T08", "case": "model_failure_not_hidden", "result": "passed"},
+    {"id": "T09", "case": "step_limit", "result": "passed"},
+    {"id": "T10", "case": "tool_call_limit", "result": "passed"},
+    {"id": "T11", "case": "single_source_evidence_gap", "result": "passed"},
+    {"id": "T12", "case": "conflicting_claims_block_research", "result": "passed"},
+    {"id": "T13", "case": "refresh_requires_authority", "result": "passed"},
+    {"id": "T14", "case": "refresh_runs_once_per_agent_run", "result": "passed"},
+    {"id": "T15", "case": "observed_ids_isolated_between_runs", "result": "passed"},
+    {"id": "T16", "case": "missing_model_configuration", "result": "passed"},
+    {"id": "T17", "case": "aihot_removable_by_configuration", "result": "passed"}
+  ]
+}
+

@@ -33,6 +33,7 @@ desktop.ini
 backend/build/
 backend/dist/
 backend/dist-*/
+交付材料/qa/
 
 # Keep the embedded production frontend committed because FastAPI serves it.
 !backend/src/wechat_agent/web/dist/

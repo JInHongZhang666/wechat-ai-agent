@@ -411,7 +411,10 @@
             "type": "integer"
           },
           "qualification": {
-            "const": "multi_publisher",
+            "enum": [
+              "multi_publisher",
+              "single_source"
+            ],
             "title": "Qualification",
             "type": "string"
           },

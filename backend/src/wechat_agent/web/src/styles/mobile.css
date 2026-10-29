@@ -171,11 +171,33 @@
   }
 
   .hot-topics-row {
+    grid-template-columns: 22px minmax(0, 1fr) 58px 22px;
+    gap: 8px;
     padding: 10px 14px;
   }
 
   .hot-topics-link {
     font-size: 13px;
+  }
+
+  .hot-topics-sources {
+    display: none;
+  }
+
+  .hot-topics-meta {
+    font-size: 10px;
+  }
+
+  .hot-topics-meta strong {
+    font-size: 12px;
+  }
+
+  .hot-topics-row-loading {
+    grid-template-columns: 22px minmax(0, 1fr) 58px;
+  }
+
+  .hot-topics-disclosure {
+    text-align: left;
   }
 
   .ranking-page {

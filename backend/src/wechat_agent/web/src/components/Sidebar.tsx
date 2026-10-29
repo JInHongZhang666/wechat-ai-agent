@@ -5,7 +5,6 @@ interface NavItem {
   label: string
   path: string
   icon: string
-  hash?: string
 }
 
 interface NavGroup {
@@ -26,13 +25,17 @@ const NEWS_GROUPS: NavGroup[] = [
   },
 ]
 
+const AGENT_ITEMS: NavItem[] = [
+  { label: '灵犀探讯', path: '/agent', icon: '✦' },
+]
+
 const CREATE_ITEMS: NavItem[] = [
   { label: '工作台', path: '/create/drafts', icon: '▦' },
-  { label: '视频解析', path: '/create/drafts', hash: '#video-parser', icon: '◉' },
-  { label: '会员中心', path: '/create/drafts', hash: '#membership', icon: '♙' },
-  { label: '公众号', path: '/create/drafts', hash: '#wechat-account', icon: '☻' },
-  { label: '提示词词库', path: '/create/drafts', hash: '#prompt-library', icon: '♧' },
-  { label: '设置', path: '/create/drafts', hash: '#writing-settings', icon: '⚙' },
+  { label: '视频解析', path: '/create/video', icon: '◉' },
+  { label: '会员中心', path: '/create/membership', icon: '♙' },
+  { label: '公众号', path: '/create/wechat', icon: '☻' },
+  { label: '提示词词库', path: '/create/prompts', icon: '♧' },
+  { label: '设置', path: '/create/settings', icon: '⚙' },
 ]
 
 const OPS_ITEMS: NavItem[] = [
@@ -69,14 +72,28 @@ export default function Sidebar() {
           </div>
         ))}
 
+        <div className="side-group">智能助手</div>
+        {AGENT_ITEMS.map(item => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) =>
+              `side-link${isActive ? ' side-link-active' : ''}`
+            }
+          >
+            <span className="side-icon">{item.icon}</span>
+            <span className="side-label">{item.label}</span>
+          </NavLink>
+        ))}
+
         <div className="side-group">内容创作</div>
         {CREATE_ITEMS.map(item => {
           const isActive = location.pathname === item.path
-            && (item.hash ? location.hash === item.hash : !location.hash)
+            || (item.path === '/create/settings' && location.pathname.startsWith(`${item.path}/`))
           return (
           <Link
-            key={`${item.path}${item.hash || ''}`}
-            to={`${item.path}${item.hash || ''}`}
+            key={item.path}
+            to={item.path}
             className={`side-link${isActive ? ' side-link-active' : ''}`}
           >
             <span className="side-icon">{item.icon}</span>

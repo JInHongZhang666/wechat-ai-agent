@@ -5,6 +5,8 @@
 
 /* ── App Shell ─────────────────────────────────────────────────── */
 .app-shell {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   min-height: 100vh;
   margin: 0;
@@ -12,6 +14,91 @@
   display: grid;
   grid-template-columns: var(--nav-width) minmax(0, 1fr);
   gap: 0;
+}
+
+/* ── Ambient Background ───────────────────────────────────────── */
+.app-ambient-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: #05070e url('/assets/columbina-wallpaper-05-hq-poster.jpg') center / cover no-repeat;
+}
+
+.app-ambient-background::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: '';
+  background:
+    radial-gradient(circle at 58% 42%, rgba(21, 58, 108, 0.08), transparent 52%),
+    linear-gradient(180deg, rgba(7, 9, 15, 0.38), rgba(8, 10, 17, 0.62));
+}
+
+.app-ambient-background-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  opacity: 1;
+  filter: saturate(0.9) brightness(0.78) contrast(1.04);
+}
+
+.app-ambient-background img.app-ambient-background-media { animation: app-background-reveal .28s ease both; }
+.app-ambient-background img.app-ambient-background-media.is-custom-image,
+[data-theme="light"] .app-ambient-background img.app-ambient-background-media.is-custom-image {
+  filter: none;
+  image-rendering: auto;
+}
+
+.app-ambient-effect { position: absolute; inset: 0; z-index: 2; overflow: hidden; pointer-events: none; }
+.app-ambient-effect i { position: absolute; left: var(--particle-x); top: -8%; display: block; will-change: transform; animation-delay: var(--particle-delay); animation-duration: var(--particle-duration); animation-iteration-count: infinite; animation-timing-function: linear; }
+.app-ambient-effect.is-petals i { width: var(--particle-size); height: calc(var(--particle-size) * .72); border-radius: 75% 18% 72% 24%; background: linear-gradient(135deg, rgba(255, 241, 248, .96), rgba(245, 146, 188, .82)); box-shadow: 0 0 5px rgba(255, 203, 226, .24); animation-name: ambient-petal-fall; }
+.app-ambient-effect.is-rain i { width: 1px; height: var(--particle-size); border-radius: 999px; background: linear-gradient(180deg, transparent, rgba(188, 226, 255, .72)); animation-name: ambient-rain-fall; }
+
+@keyframes app-background-reveal {
+  from { opacity: 0; transform: scale(1.015); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ambient-petal-fall {
+  0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 0; }
+  12% { opacity: .9; }
+  55% { transform: translate3d(var(--particle-drift), 52vh, 0) rotate(190deg); }
+  100% { transform: translate3d(var(--particle-drift), 112vh, 0) rotate(390deg); opacity: .18; }
+}
+
+@keyframes ambient-rain-fall {
+  0% { transform: translate3d(0, -16vh, 0) rotate(10deg); opacity: 0; }
+  10% { opacity: .78; }
+  100% { transform: translate3d(var(--particle-drift), 118vh, 0) rotate(10deg); opacity: .08; }
+}
+
+[data-theme="light"] .app-ambient-background {
+  background-color: #eef3fb;
+}
+
+[data-theme="light"] .app-ambient-background::after {
+  background:
+    radial-gradient(circle at 58% 42%, rgba(255, 255, 255, 0.56), transparent 48%),
+    linear-gradient(180deg, rgba(248, 250, 252, 0.78), rgba(248, 250, 252, 0.9));
+}
+
+[data-theme="light"] .app-ambient-background-media {
+  opacity: 1;
+  filter: saturate(0.75) brightness(1.03) contrast(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  video.app-ambient-background-media,
+  .app-ambient-effect {
+    display: none;
+  }
 }
 
 /* ── Sidebar ───────────────────────────────────────────────────── */
@@ -29,7 +116,9 @@
   border: 0;
   border-right: 1px solid var(--sidebar-border);
   box-shadow: none;
-  background: var(--sidebar-bg);
+  background: linear-gradient(90deg, rgba(4, 7, 14, .52), rgba(4, 7, 14, .38));
+  -webkit-backdrop-filter: saturate(.86) brightness(.68);
+  backdrop-filter: saturate(.86) brightness(.68);
   overflow: hidden;
   transition: var(--theme-transition);
 }
@@ -65,7 +154,21 @@
 }
 
 [data-theme="light"] .sidebar {
-  background: #ffffff;
+  background: linear-gradient(90deg, rgba(248, 250, 252, .64), rgba(248, 250, 252, .48));
+  -webkit-backdrop-filter: saturate(.8) brightness(1.04);
+  backdrop-filter: saturate(.8) brightness(1.04);
+}
+
+.app-shell.has-custom-background .sidebar {
+  background: linear-gradient(90deg, rgba(4, 7, 14, .48), rgba(4, 7, 14, .34));
+  -webkit-backdrop-filter: saturate(.88) brightness(.7);
+  backdrop-filter: saturate(.88) brightness(.7);
+}
+
+[data-theme="light"] .app-shell.has-custom-background .sidebar {
+  background: linear-gradient(90deg, rgba(248, 250, 252, .58), rgba(248, 250, 252, .42));
+  -webkit-backdrop-filter: saturate(.82) brightness(1.04);
+  backdrop-filter: saturate(.82) brightness(1.04);
 }
 
 .brand-logo {
@@ -374,6 +477,18 @@
     border-bottom: 1px solid var(--border);
     background: var(--bg-0);
     transition: background-color 0.3s ease;
+  }
+
+  .app-shell.has-custom-background .app-mobile-bar {
+    background: rgba(5, 8, 15, .68);
+    -webkit-backdrop-filter: saturate(.82) brightness(.76);
+    backdrop-filter: saturate(.82) brightness(.76);
+  }
+
+  [data-theme="light"] .app-shell.has-custom-background .app-mobile-bar {
+    background: rgba(248, 250, 252, .72);
+    -webkit-backdrop-filter: saturate(.78) brightness(1.04);
+    backdrop-filter: saturate(.78) brightness(1.04);
   }
 
   .app-hamburger {

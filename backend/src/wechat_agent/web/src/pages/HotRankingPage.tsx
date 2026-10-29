@@ -2,6 +2,18 @@ import { useEffect, useState } from 'react'
 import type { HotTopic, HotTopicsResponse } from '../types'
 import { apiGet } from '../utils/api'
 
+interface RankingTopic {
+  id: string
+  title: string
+  url: string | null
+  sourceNames: string[]
+  sourceCount: number
+  signalCount: number
+  reportCount: number
+  latestAt: string
+  score: number | null
+}
+
 export default function HotRankingPage() {
   const [topics, setTopics] = useState<HotTopic[]>([])
   const [loading, setLoading] = useState(true)
@@ -24,12 +36,14 @@ export default function HotRankingPage() {
     return () => controller.abort()
   }, [retryKey])
 
+  const rankingTopics = buildRankingTopics(topics)
+
   return (
     <div className="ranking-page">
       <header className="ranking-hero">
         <span className="page-eyebrow">HOT RADAR</span>
         <h1>AI 热点榜</h1>
-        <p>过去 24 小时最热的 AI 事件，按精选报道、信源数量与讨论信号实时排序。</p>
+        <p>统计最近 24 小时全部有效资讯，呈现被最多报道与独立信源共同覆盖的 AI 核心话题。</p>
       </header>
 
       {error && (
@@ -47,7 +61,7 @@ export default function HotRankingPage() {
             <span className="page-eyebrow">NOW</span>
             <h2>当前热点</h2>
           </div>
-          <span>{topics.length} 个事件</span>
+          <span>{rankingTopics.length} 个事件</span>
         </div>
 
         {loading && Array.from({ length: 6 }, (_, index) => (
@@ -60,14 +74,20 @@ export default function HotRankingPage() {
           </div>
         ))}
 
-        {!loading && topics.map((topic, index) => (
-          <article className="ranking-row" key={`${topic.title}-${index}`}>
+        {!loading && rankingTopics.map((topic, index) => (
+          <article className="ranking-row" key={topic.id}>
             <span className={`ranking-index${index < 3 ? ` is-top-${index + 1}` : ''}`}>
               {String(index + 1).padStart(2, '0')}
             </span>
             <div className="ranking-story">
               <div className="ranking-title-line">
-                <h3>{topic.title}</h3>
+                <h3>
+                  {topic.url ? (
+                    <a href={topic.url} target={isExternalUrl(topic.url) ? '_blank' : undefined} rel="noreferrer">
+                      {topic.title}
+                    </a>
+                  ) : topic.title}
+                </h3>
                 {statusFor(topic) && <span className="ranking-status">{statusFor(topic)}</span>}
               </div>
               <p>{topic.sourceNames.slice(0, 3).join(' · ') || '多信源聚合'} · {relativeTime(topic.latestAt)}</p>
@@ -80,26 +100,25 @@ export default function HotRankingPage() {
           </article>
         ))}
 
-        {!loading && !error && topics.length === 0 && (
+        {!loading && !error && rankingTopics.length === 0 && (
           <div className="page-empty-state ranking-empty">
-            <p className="page-empty-state-text">最近 24 小时还没有形成多信源热点事件。</p>
+            <p className="page-empty-state-text">最近 24 小时还没有可统计的热点资讯。</p>
           </div>
         )}
       </section>
 
       <p className="ranking-note">
-        榜单热度由质量评分、独立信源数与报道信号综合计算；同一事件的关联报道合并统计。
+        热点统计不要求通过精选门槛；热度值等于相关报道数量，独立信源数单独统计，质量评分只用于选择代表标题和同热度排序。
       </p>
     </div>
   )
 }
 
-function heatValue(topic: HotTopic): number {
-  if (topic.score != null) return Math.round(topic.score)
-  return topic.signalCount + topic.sourceCount * 4 + topic.reportCount * 2
+function heatValue(topic: RankingTopic): number {
+  return topic.reportCount
 }
 
-function statusFor(topic: HotTopic): string | null {
+function statusFor(topic: RankingTopic): string | null {
   const ageHours = (Date.now() - new Date(topic.latestAt).getTime()) / 3_600_000
   if (ageHours <= 6) return '新'
   if (topic.sourceCount >= 3) return '发酵中'
@@ -113,7 +132,7 @@ function relativeTime(value: string): string {
   return `${Math.floor(hours / 24)} 天前`
 }
 
-function MiniTrend({ topic, index }: { topic: HotTopic; index: number }) {
+function MiniTrend({ topic, index }: { topic: RankingTopic; index: number }) {
   const heat = heatValue(topic)
   const points = [
     34 + ((heat + index * 7) % 9),
@@ -129,4 +148,22 @@ function MiniTrend({ topic, index }: { topic: HotTopic; index: number }) {
       <circle cx="108" cy={points[points.length - 1]} r="2.5" fill="var(--surface-card)" stroke="currentColor" strokeWidth="2" />
     </svg>
   )
+}
+
+function buildRankingTopics(topics: HotTopic[]): RankingTopic[] {
+  return topics.map((topic, index) => ({
+    id: `topic-${index}-${topic.title}`,
+    title: topic.title,
+    url: topic.links?.story ?? null,
+    sourceNames: topic.sourceNames,
+    sourceCount: topic.sourceCount,
+    signalCount: topic.signalCount,
+    reportCount: topic.reportCount,
+    latestAt: topic.latestAt,
+    score: topic.score ?? null,
+  }))
+}
+
+function isExternalUrl(value: string): boolean {
+  return /^https?:\/\//i.test(value)
 }

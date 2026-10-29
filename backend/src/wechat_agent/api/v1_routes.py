@@ -2605,15 +2605,47 @@ def _build_hot_topics(
     *,
     publisher_groups: dict[str, str] | None = None,
 ) -> list[dict[str, object]]:
-    """Conservative title aggregation gated by independent publishers."""
+    """Cluster all eligible reports by their recurring core subject.
+
+    Report/source counts are the public popularity signals. Distribution
+    scores are used only as a lead-story and tie-breaking quality signal.
+    """
     publisher_groups = publisher_groups or {}
+    eligible_rows = [row for row in rows if row.decision.eligible]
+    title_keys = [_normalized_title_key(row.article.title) for row in eligible_rows]
+    title_counts: dict[str, int] = {}
+    topic_terms: list[set[str]] = []
+    term_counts: dict[str, int] = {}
+
+    for row, title_key in zip(eligible_rows, title_keys, strict=True):
+        if title_key:
+            title_counts[title_key] = title_counts.get(title_key, 0) + 1
+        terms = _topic_terms(row.article.title)
+        topic_terms.append(terms)
+        for term in terms:
+            term_counts[term] = term_counts.get(term, 0) + 1
+
     groups: dict[str, list[DistributionRow]] = {}
-    for row in rows:
-        if not row.decision.selected:
-            continue
-        key = _normalized_title_key(row.article.title)
-        if not key:
-            continue
+    for row, title_key, terms in zip(
+        eligible_rows,
+        title_keys,
+        topic_terms,
+        strict=True,
+    ):
+        if title_key and title_counts.get(title_key, 0) > 1:
+            key = f"title:{title_key}"
+        else:
+            recurring_terms = [term for term in terms if term_counts.get(term, 0) > 1]
+            if recurring_terms:
+                primary_term = max(
+                    recurring_terms,
+                    key=lambda term: _topic_term_rank(term, term_counts[term]),
+                )
+                key = f"term:{primary_term}"
+            elif title_key:
+                key = f"title:{title_key}"
+            else:
+                continue
         groups.setdefault(key, []).append(row)
 
     topics: list[dict[str, object]] = []
@@ -2629,23 +2661,16 @@ def _build_hot_topics(
         )
         lead = ranked[0]
         source_names = list(dict.fromkeys(row.article.source_name for row in ranked))
-        source_ids = {
-            row.article.source_id
-            or row.article.source_identity
-            or f"name:{row.article.source_name.casefold()}"
-            for row in ranked
-        }
+        source_ids = {_hot_source_identity(row.article) for row in ranked}
         independent_groups = {
-            publisher_groups.get(
-                row.article.source_id or "",
-                row.article.source_identity
-                or row.article.source_id
-                or f"name:{row.article.source_name.casefold()}",
-            )
+            _hot_publisher_group(row.article, publisher_groups)
             for row in ranked
         }
-        if len(independent_groups) < 2:
-            continue
+        qualification = (
+            "multi_publisher"
+            if len(independent_groups) >= 2
+            else "single_source"
+        )
         topics.append({
             "title": lead.article.title,
             "category": public_category_slug(lead.article.category),
@@ -2655,21 +2680,114 @@ def _build_hot_topics(
             "signalCount": len(independent_groups),
             "publisherGroupCount": len(independent_groups),
             "reportCount": len(grouped),
-            "qualification": "multi_publisher",
+            "qualification": qualification,
             "sourceNames": source_names,
             "latestAt": max(row.article.published_at for row in grouped).isoformat(),
+            "links": {"story": lead.article.source_url},
         })
     topics.sort(
         key=lambda topic: (
-            topic["signalCount"],
-            topic["sourceCount"],
             topic["reportCount"],
+            topic["publisherGroupCount"],
+            topic["sourceCount"],
             topic["score"],
             topic["latestAt"],
         ),
         reverse=True,
     )
     return topics
+
+
+_TOPIC_ALIAS_PATTERNS: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r"\bgpt[-\s]?6(?:\.\d+)?\b", re.IGNORECASE), "gpt-6"),
+    (re.compile(r"\bchatgpt\b", re.IGNORECASE), "chatgpt"),
+    (re.compile(r"\bopenai\b", re.IGNORECASE), "openai"),
+    (re.compile(r"\banthropic\b", re.IGNORECASE), "anthropic"),
+    (re.compile(r"\bclaude\b", re.IGNORECASE), "claude"),
+    (re.compile(r"\bgemini\b", re.IGNORECASE), "gemini"),
+    (re.compile(r"\bdeepseek\b", re.IGNORECASE), "deepseek"),
+    (re.compile(r"\bqwen\b|千问|通义", re.IGNORECASE), "qwen"),
+    (re.compile(r"\bllama\b", re.IGNORECASE), "llama"),
+    (re.compile(r"\bcursor\b", re.IGNORECASE), "cursor"),
+    (re.compile(r"\bopenclaw\b", re.IGNORECASE), "openclaw"),
+    (re.compile(r"\bmachine[\s-]+learning\b|机器学习", re.IGNORECASE), "machine-learning"),
+    (re.compile(r"\bdatabricks\b", re.IGNORECASE), "databricks"),
+    (re.compile(r"\blanggraph\b", re.IGNORECASE), "langgraph"),
+    (re.compile(r"\bcopilot\b", re.IGNORECASE), "copilot"),
+)
+
+_TOPIC_LATIN_STOPWORDS = frozenset({
+    "about", "after", "again", "against", "along", "also", "among", "and",
+    "beyond", "code", "from", "helps", "into", "latest", "model", "models",
+    "new", "news", "over", "release", "released", "shows", "that", "the",
+    "their", "this", "through", "using", "what", "when", "where", "with",
+    "without", "agent", "agents", "artificial", "intelligence",
+})
+
+_TOPIC_CJK_STOPWORDS = frozenset({
+    "人工智能", "大语言模", "语言模型", "最新发布", "正式发布", "开源模型",
+    "模型发布", "完成融资", "行业应用", "技术发展", "功能更新", "研究发现",
+})
+
+_MULTI_PUBLISHER_HOSTS = frozenset({
+    "x.com", "twitter.com", "mp.weixin.qq.com", "medium.com", "github.com",
+    "reddit.com", "www.reddit.com", "youtube.com", "www.youtube.com",
+})
+
+
+def _hot_source_identity(article: ArticleRecord) -> str:
+    """Keep individual accounts distinct on multi-publisher platforms."""
+    raw_identity = article.source_identity or article.source_id or ""
+    if raw_identity.startswith("external:"):
+        host = raw_identity.removeprefix("external:").casefold()
+        if host in _MULTI_PUBLISHER_HOSTS:
+            return f"name:{article.source_name.casefold()}"
+    return raw_identity or f"name:{article.source_name.casefold()}"
+
+
+def _hot_publisher_group(
+    article: ArticleRecord,
+    publisher_groups: dict[str, str],
+) -> str:
+    identity = _hot_source_identity(article)
+    if (article.source_identity or "").startswith("external:"):
+        return publisher_groups.get(identity, identity)
+    return publisher_groups.get(
+        identity,
+        publisher_groups.get(article.source_id or "", identity),
+    )
+
+
+def _topic_terms(title: str) -> set[str]:
+    """Extract stable, dependency-free topic terms from one headline."""
+    normalized = unicodedata.normalize("NFKC", title).casefold()
+    terms = {
+        alias
+        for pattern, alias in _TOPIC_ALIAS_PATTERNS
+        if pattern.search(normalized)
+    }
+
+    for token in re.findall(r"[a-z0-9][a-z0-9.+-]{2,}", normalized):
+        token = token.strip(".+-")
+        if len(token) < 4 or token in _TOPIC_LATIN_STOPWORDS:
+            continue
+        if re.fullmatch(r"gpt[-]?6(?:\.\d+)?", token):
+            token = "gpt-6"
+        terms.add(token)
+
+    for run in re.findall(r"[\u3400-\u9fff]{4,}", normalized):
+        for index in range(len(run) - 3):
+            term = run[index:index + 4]
+            if term not in _TOPIC_CJK_STOPWORDS:
+                terms.add(term)
+    return terms
+
+
+def _topic_term_rank(term: str, document_count: int) -> tuple[int, int, int]:
+    """Prefer widely repeated, model-specific and descriptive topic terms."""
+    is_model_family = int(bool(re.search(r"\d", term)))
+    is_known_alias = int(any(alias == term for _, alias in _TOPIC_ALIAS_PATTERNS))
+    return document_count, is_model_family + is_known_alias, len(term)
 
 
 def _normalized_title_key(title: str) -> str:

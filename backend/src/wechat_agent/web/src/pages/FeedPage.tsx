@@ -21,6 +21,16 @@ interface FeedPageProps {
   showCategories?: boolean
 }
 
+interface FeaturedHotTopic {
+  id: string
+  title: string
+  url: string | null
+  sourceNames: string[]
+  sourceCount: number
+  heat: number
+  latestAt: string
+}
+
 export default function FeedPage({
   mode,
   title,
@@ -75,6 +85,7 @@ export default function FeedPage({
     })
     const hotRequest = showHotTopics
       ? apiGet<HotTopicsResponse>('/v1/hot-topics', { signal: controller.signal })
+          .catch(() => ({ schemaVersion: 1 as const, count: 0, items: [] }))
       : Promise.resolve<HotTopicsResponse>({ schemaVersion: 1, count: 0, items: [] })
 
     Promise.all([feedRequest, hotRequest])
@@ -138,6 +149,8 @@ export default function FeedPage({
     }
   }
 
+  const featuredHotTopics = buildFeaturedHotTopics(hotTopics)
+
   return (
     <>
       <div className="page-header-compact">
@@ -185,23 +198,68 @@ export default function FeedPage({
         </div>
       </div>
 
-      {showHotTopics && !loading && hotTopics.length > 0 && (
-        <section className="hot-topics">
+      {showHotTopics && (
+        <section className="hot-topics" aria-labelledby="current-hot-topics-title">
           <div className="hot-topics-head">
-            <h2 className="hot-topics-title">当前热点</h2>
+            <h2 className="hot-topics-title" id="current-hot-topics-title">
+              <span className="hot-topics-live-dot" aria-hidden="true" />
+              当前热点
+            </h2>
             <Link className="hot-topics-more" to="/hot">完整榜单 →</Link>
           </div>
           <ol className="hot-topics-list">
-            {hotTopics.map((topic, index) => (
-              <li key={`${topic.title}-${index}`} className="hot-topics-row">
+            {loading && Array.from({ length: 5 }, (_, index) => (
+              <li key={index} className="hot-topics-row hot-topics-row-loading" aria-hidden="true">
+                <span className="skeleton hot-topics-rank-skeleton" />
+                <span className="skeleton hot-topics-title-skeleton" />
+                <span className="skeleton hot-topics-meta-skeleton" />
+              </li>
+            ))}
+            {!loading && featuredHotTopics.map((topic, index) => (
+              <li key={topic.id} className="hot-topics-row">
                 <span className={`hot-topics-rank${index < 3 ? ` hot-topics-rank-${index + 1}` : ''}`}>
                   {index + 1}
                 </span>
-                <span className="hot-topics-link">{topic.title}</span>
-                <span className="hot-topics-meta">{heatValue(topic)} 热度</span>
+                {topic.url ? (
+                  <a
+                    className="hot-topics-link"
+                    href={topic.url}
+                    target={isExternalUrl(topic.url) ? '_blank' : undefined}
+                    rel={isExternalUrl(topic.url) ? 'noreferrer' : undefined}
+                  >
+                    {topic.title}
+                  </a>
+                ) : (
+                  <Link className="hot-topics-link" to="/hot">{topic.title}</Link>
+                )}
+                <div className="hot-topics-sources" aria-label={`${topic.sourceCount} 个信源`}>
+                  <div className="hot-topics-source-stack" aria-hidden="true">
+                    {topic.sourceNames.slice(0, 4).map((sourceName, sourceIndex) => (
+                      <span
+                        key={`${sourceName}-${sourceIndex}`}
+                        className={`hot-topics-source-badge hot-topics-source-badge-${(index + sourceIndex) % 5}`}
+                        title={sourceName}
+                      >
+                        {sourceInitial(sourceName)}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="hot-topics-source-count">{topic.sourceCount} 源</span>
+                </div>
+                <span className="hot-topics-meta">
+                  <strong>{topic.heat}</strong>
+                  <span>热度</span>
+                </span>
+                <span className={`hot-topics-trend hot-topics-trend-${trendFor(topic)}`} aria-label={trendLabel(topic)}>
+                  {trendIcon(topic)}
+                </span>
               </li>
             ))}
+            {!loading && featuredHotTopics.length === 0 && (
+              <li className="hot-topics-empty">近 24 小时暂时没有可展示的热点资讯</li>
+            )}
           </ol>
+          <p className="hot-topics-disclosure">统计最近 24 小时全部有效资讯，无需通过精选门槛；热度为相关报道数量，旁边为独立信源数。</p>
         </section>
       )}
 
@@ -239,7 +297,48 @@ export default function FeedPage({
   )
 }
 
-function heatValue(topic: HotTopic): number {
-  if (topic.score != null) return Math.round(topic.score)
-  return topic.signalCount + topic.sourceCount * 4 + topic.reportCount * 2
+function buildFeaturedHotTopics(hotTopics: HotTopic[]): FeaturedHotTopic[] {
+  return hotTopics.slice(0, 5).map((topic, index) => ({
+    id: `topic-${index}-${topic.title}`,
+    title: topic.title,
+    url: topic.links?.story ?? null,
+    sourceNames: topic.sourceNames,
+    sourceCount: topic.sourceCount,
+    heat: topic.reportCount,
+    latestAt: topic.latestAt,
+  }))
+}
+
+function sourceInitial(sourceName: string): string {
+  const cleaned = sourceName.replace(/^[^：:]+[：:]\s*/, '').trim()
+  const latin = cleaned.match(/[A-Za-z0-9]/)?.[0]
+  return (latin ?? cleaned.slice(0, 1) ?? 'AI').toUpperCase()
+}
+
+function ageInHours(value: string): number {
+  return Math.max(0, (Date.now() - new Date(value).getTime()) / 3_600_000)
+}
+
+function trendFor(topic: FeaturedHotTopic): 'new' | 'rising' | 'steady' {
+  if (ageInHours(topic.latestAt) <= 6) return 'new'
+  if (topic.sourceCount >= 2) return 'rising'
+  return 'steady'
+}
+
+function trendIcon(topic: FeaturedHotTopic): string {
+  const trend = trendFor(topic)
+  if (trend === 'new') return '新'
+  if (trend === 'rising') return '↗'
+  return '—'
+}
+
+function trendLabel(topic: FeaturedHotTopic): string {
+  const trend = trendFor(topic)
+  if (trend === 'new') return '最新热点'
+  if (trend === 'rising') return '热度上升'
+  return '热度平稳'
+}
+
+function isExternalUrl(value: string): boolean {
+  return /^https?:\/\//i.test(value)
 }

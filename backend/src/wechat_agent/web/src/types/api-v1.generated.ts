@@ -77,7 +77,7 @@ export interface HotTopic {
   signalCount: number
   publisherGroupCount: number
   reportCount: number
-  qualification: "multi_publisher"
+  qualification: "multi_publisher" | "single_source"
   sourceNames: Array<string>
   latestAt: string
   category?: "ai-models" | "ai-products" | "industry" | "paper" | "tip" | null

@@ -151,7 +151,7 @@ class HotTopic(BaseModel):
     signalCount: int = Field(ge=0)
     publisherGroupCount: int = Field(ge=0)
     reportCount: int = Field(ge=0)
-    qualification: Literal["multi_publisher"]
+    qualification: Literal["multi_publisher", "single_source"]
     sourceNames: list[str]
     latestAt: datetime
     category: CategorySlug | None = None

@@ -100,6 +100,130 @@ Story，只有相同规范化标题得到至少 2 个独立 `publisherGroup` 佐
 不依赖大模型；`start.ps1` 默认把分发模型每日额度设为 0，采集、去重、入库、
 离线评分与页面更新仍会持续运行。
 
+## Agent M2 试运行
+
+M2现以“直接搜索→补充来源→证据检查→回答”为核心，不再向Agent暴露公众号画像。
+用户没有写明时间范围时默认最近7天，不以追问阻断检索；后续消息可以继承主题并
+修改时间或关注角度。对话上下文当前保存在
+进程内存中，服务重启后清空；持久会话属于后续阶段。
+
+M2 在M1查询闭环基础上增加研究模式：先查询真实文章ID，再构建摘要证据包，
+根据缺口查询补充来源并重新构建。默认 `mode=query` 保留查询行为；
+`mode=research` 则强制检查证据。API请求示例：
+
+```json
+{"goal":"选择近期一条AI事件，检查证据并补充来源，缺口无法解决就说明不足", "mode":"research", "refresh_sources":false}
+```
+
+当前本地工具为 `search_ai_news`、`find_supporting_sources`、
+`build_research_evidence` 和 `refresh_news_sources`。补充来源和证据工具仅使用
+本次任务已查询到的文章和本地库；证据
+保存在本次运行结果中，未建立可恢复的持久研究项目。补充来源是具体事件的
+关键词候选检索，候选数不能替代事实验证。
+
+只有API请求显式设置 `refresh_sources=true` 才能调用刷新工具。刷新复用已有
+调度采集服务，只运行已配置且到期的来源，遵守来源租约和熔断；不接受模型
+提供的URL，不是全网搜索。单任务内最多尝试一次，即使失败也不会重复写入；
+跨HTTP请求的任务去重及持久恢复仍在后续阶段。刷新可能写入采集任务和资讯，
+并受原分发模型预算控制。CLI保持本地研究，不启用网络刷新。
+
+AIHOT 以独立可移除扩展接入，提供 `search_aihot_news`，只读取
+`https://aihot.news/api/v1/items` 的匿名公开 JSON 数据，用于最近24小时或7天的
+外部资讯发现。它不会写入本地库，也不能把外部条目ID交给本地证据工具。设置
+`WECHAT_AGENT_AIHOT_ENABLED=0` 可完全关闭并从Agent工具列表移除；请求超时可用
+`WECHAT_AGENT_AIHOT_TIMEOUT_SECONDS` 调整。AIHOT内容只作发现线索，回答优先保留
+原始来源链接，不能把聚合摘要当成独立事实核验。
+
+AIHOT 还以独立的 `AihotCollector` 接入内容采集管线，用来扩充最近 7 天的候选
+资讯。采集结果保留原始媒体名称与原文 URL，仍执行本地 URL 去重、相关性预筛、
+四维评分和代码精选门槛；AIHOT 自身分数不会覆盖本地评分，同一 URL 的官方或
+直连采集版本优先。该采集器与 Agent 对话工具使用不同开关：
+
+```powershell
+# 关闭/开启 AIHOT 候选资讯采集（默认开启）
+$env:WECHAT_AGENT_AIHOT_INGEST_ENABLED = "0" # 或 "1"
+
+# all 扩大召回；selected 仅采集 AIHOT 精选，默认 all
+$env:WECHAT_AGENT_AIHOT_INGEST_MODE = "all"
+
+# 单次读取 1-100 条，默认 100
+$env:WECHAT_AGENT_AIHOT_INGEST_LIMIT = "100"
+
+# 独立请求超时，默认 12 秒
+$env:WECHAT_AGENT_AIHOT_INGEST_TIMEOUT_SECONDS = "12"
+```
+
+完整移除采集能力时，只需删除
+`backend/src/wechat_agent/collectors/aihot.py`，并移除 `collectors/defaults.py`
+中的一条 import 和 AIHOT 注册块；原有信源、评分及灵犀探讯 Agent 均不受影响。
+
+研究结果中的 `needs_evidence` 表示正常完成缺口判断，但不能进入正式写作。
+服务端检查来源独立性、已验证的一手来源、待核实事实和冲突；模型不能修改
+这些结论。未知文章ID、未构建证据或最后一次证据构建失败不能标记完成。
+当前证据引擎基于摘要句子匹配，不能替代原文阅读与全面语义核验，可能保守地
+保留很多待核实内容。M3将接入Brief、写作和质检，M4实现持久任务恢复。
+
+在下方CLI命令中加 `--mode research` 即可运行研究模式。
+
+M2真实模型冒烟验证：模型执行了查询、证据构建、补充来源检索三个工具调用，
+共4轮决策。实际候选只有一个独立来源且包含待核实内容，补源未找到额外候选，
+服务端正确返回 `needs_evidence`，没有将它误报为可写作。已验证的是研究与缺口
+处理链路；外网刷新适配有自动化测试，本次冒烟未触发真实信源刷新。
+
+### M1 基础与启动方式
+
+2026-10-26 的整改目标为阶段0与阶段1：建立可独立启用的 LangGraph
+`decide → execute → decide` 循环，并接入只读资讯查询工具。
+模型自行选择工具与参数，读取结果后继续查询或结束。空查询是真实观察结果，
+不伪造实时新闻；没有成功执行资讯查询不能标记完成。
+
+今日验收：旧测试回归、工具参数校验、空结果后调整查询、步数与工具次数限制、
+超时、模型错误、API集成及一次真实模型验证。研究证据构建、写作和持久恢复
+属于后续M2至M4，当前不对这些能力宣称完成。
+
+从项目的 `backend` 目录执行：
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -e ".[dev,agent]"
+$env:WECHAT_AGENT_AGENT_ENABLED = "1"
+# 默认复用已配置的 WECHAT_AGENT_LLM_* 服务商；可单独覆盖Agent模型。
+# $env:WECHAT_AGENT_AGENT_MODEL = "服务商支持工具调用的模型ID"
+.\.venv\Scripts\python.exe -m wechat_agent.agent --goal "查询本地最近7天的AI资讯，给出来源；没有结果就说明缺口"
+```
+
+Web服务须携带上述开关重新启动，才会启用 `POST /api/v1/agent/runs`，
+也可在项目目录执行 `./start.ps1 -EnableAgent`（须先安装agent依赖并配置模型）。
+请求体为 `{"goal":"查询本地最近7天的AI资讯"}`。
+`GET /api/v1/agent/status` 返回能力与开关状态；
+`GET /api/v1/agent/runs/{run_id}` 读取最近的结果。
+
+多轮对话使用 `POST /api/v1/agent/conversations`，请求体为
+`{"message":"帮我找最近重要的AI资讯","mode":"query"}`。Agent会立即查询；将后续
+修正内容发送到
+`POST /api/v1/agent/conversations/{conversation_id}/messages`，请求体为
+`{"message":"只看OpenAI产品更新"}`。
+`GET /api/v1/agent/conversations/{conversation_id}` 可读取当前进程内会话。
+
+M1接口同步返回，单实例同一时间执行一个任务，最多保留100个进程内结果；
+重启清空，不支持恢复、取消或流式事件。结果中的 `status` 才是任务结果，
+HTTP 201 不代表模型成功。使用现有 `127.0.0.1` 本地部署方式；本阶段接口
+没有新增用户认证，不应对公网开放。
+
+默认最多6轮模型决策、8次工具调用、120秒任务时间预算，每次最多1200输出token，
+模型网络调用不自动重试。时间预算在节点边界检查，正在执行的数据库查询不强制终止。
+`tokens` 为已报告的用量，`usage_complete=false` 表示服务商未提供完整用量。
+本阶段尚无精确金额预算；分发侧每日模型限额不约束Agent调用。
+可通过 `WECHAT_AGENT_AGENT_MAX_STEPS`、`WECHAT_AGENT_AGENT_MAX_TOOL_CALLS`、
+`WECHAT_AGENT_AGENT_TIMEOUT_SECONDS` 调整限制。未配置模型或模型失败会明确报错，
+不会使用规则结果冒充Agent成功。安装LangGraph附带LangSmith依赖不代表追踪已接入。
+
+实现参考：[LangGraph Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)
+及[工具调用协议](https://developers.openai.com/api/docs/guides/function-calling)。
+
+2026-10-26 真实模型冒烟验证通过：从现有SQLite读取近7天资讯，模型自行调用
+`search_ai_news`，按limit=2返回来源，再生成查询答复；执行2轮模型决策和1次工具调用。
+该结果只证明M1查询链路可用，不代表证据核验、写作闭环或长期运行已验收。
+
 ## 当前能做什么
 
 - 自动获取最近 7 天的 GitHub 新项目、官方 AI 公告和公开公众号搜索索引。
@@ -277,6 +401,27 @@ cd backend
 cd 05_PROJECTS\wechat-ai-agent
 .\start.ps1
 ```
+
+视频解析使用独立的本地 Speaches 容器，主项目不内嵌第三方源码。首次使用需先
+启动 Docker Desktop；脚本会自动选择 NVIDIA GPU 版本，也可用 `-VideoCpu`
+强制使用 CPU：
+
+```powershell
+# 同时启动资讯 Agent、视频转写服务和主项目
+.\start.ps1 -EnableAgent -EnableVideo
+
+# 仅启动/停止独立视频转写服务
+.\start-video.ps1
+.\start-video.ps1 -Cpu
+.\start-video.ps1 -Stop
+```
+
+启动后在 `http://127.0.0.1:8010/create/video` 上传本地视频或粘贴公开视频链接。
+系统会在本地提取音轨、生成带时间轴的字幕，并支持导出 TXT、SRT、VTT。首次
+转写还会下载 faster-whisper 模型；任务数据默认保存在
+`backend/data/video_tasks`。如需完全移除，只需删除
+`services/video-transcriber`、`start-video.ps1` 及主项目中的视频路由即可，其他
+资讯与创作模块不受影响。
 
 开发时如需自动重载，可以直接调用 Uvicorn。请先固定当前项目源码路径，
 避免系统中另一份可编辑安装被意外加载；不要把 `--reload` 与多 worker

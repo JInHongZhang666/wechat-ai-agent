@@ -67,13 +67,13 @@ body {
   --sidebar-border: #1e2130;
 
   /* 表面浮层 */
-  --surface-0: #161822;
-  --surface-1: #1c1f2e;
-  --surface-2: #222639;
-  --surface-3: #282d42;
-  --surface-card: #1a1d2b;
-  --surface-card-hover: #1f2335;
-  --surface-elevated: #242840;
+  --surface-0: rgba(22, 24, 34, 0.6);
+  --surface-1: rgba(28, 31, 46, 0.64);
+  --surface-2: rgba(34, 38, 57, 0.69);
+  --surface-3: rgba(40, 45, 66, 0.74);
+  --surface-card: rgba(26, 29, 43, 0.62);
+  --surface-card-hover: rgba(31, 35, 53, 0.72);
+  --surface-elevated: rgba(36, 40, 64, 0.76);
 
   /* 文字色阶 */
   --text-0: #f1f5f9;
@@ -135,13 +135,13 @@ body {
   --sidebar-bg: #f1f5f9;
   --sidebar-border: #e2e8f0;
 
-  --surface-0: #ffffff;
-  --surface-1: #f8fafc;
-  --surface-2: #f1f5f9;
-  --surface-3: #e2e8f0;
-  --surface-card: #ffffff;
-  --surface-card-hover: #f8fafc;
-  --surface-elevated: #ffffff;
+  --surface-0: rgba(255, 255, 255, 0.66);
+  --surface-1: rgba(248, 250, 252, 0.68);
+  --surface-2: rgba(241, 245, 249, 0.72);
+  --surface-3: rgba(226, 232, 240, 0.76);
+  --surface-card: rgba(255, 255, 255, 0.68);
+  --surface-card-hover: rgba(255, 255, 255, 0.78);
+  --surface-elevated: rgba(255, 255, 255, 0.82);
 
   --text-0: #0f172a;
   --text-1: #334155;

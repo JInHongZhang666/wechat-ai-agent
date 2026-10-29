@@ -282,7 +282,7 @@ def test_default_collectors_seed_source_registry_without_network_calls(
             "SELECT count(*) FROM sources WHERE publisher_group = 'official:openai'"
         ).fetchone()[0]
 
-    assert source_count == 36
-    assert enabled_source_count == 24
-    assert signal_only_count == 3
+    assert source_count == 37
+    assert enabled_source_count == 25
+    assert signal_only_count == 4
     assert openai_publishers == 2

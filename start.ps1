@@ -1,4 +1,49 @@
+param(
+    [switch]$EnableAgent,
+    [switch]$EnableVideo,
+    [switch]$VideoCpu
+)
+
 $ErrorActionPreference = "Stop"
+
+function Import-LocalEnvironment {
+    param([string]$Path)
+
+    if (-not (Test-Path -LiteralPath $Path)) {
+        return
+    }
+
+    foreach ($line in Get-Content -LiteralPath $Path -Encoding UTF8) {
+        $trimmed = $line.Trim()
+        if (-not $trimmed -or $trimmed.StartsWith("#")) {
+            continue
+        }
+        if ($trimmed -match '^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$') {
+            $name = $Matches[1]
+            $value = $Matches[2].Trim().Trim('"').Trim("'")
+            if (-not (Test-Path "Env:$name")) {
+                Set-Item -Path "Env:$name" -Value $value
+            }
+        }
+    }
+}
+
+Import-LocalEnvironment -Path (Join-Path $PSScriptRoot ".env")
+
+# 灵犀探讯已是正式入口，因此默认开启。仍可在启动前显式设置
+# WECHAT_AGENT_AGENT_ENABLED=0 来关闭；-EnableAgent 会强制开启。
+if ($EnableAgent -or -not (Test-Path Env:WECHAT_AGENT_AGENT_ENABLED)) {
+    $env:WECHAT_AGENT_AGENT_ENABLED = "1"
+}
+
+if ($EnableVideo) {
+    $videoArgs = @{}
+    if ($VideoCpu) {
+        $videoArgs.Cpu = $true
+    }
+    & (Join-Path $PSScriptRoot "start-video.ps1") @videoArgs
+    $env:WECHAT_AGENT_VIDEO_ENABLED = "1"
+}
 
 $backend = Join-Path $PSScriptRoot "backend"
 $venvPython = Join-Path $backend ".venv\Scripts\python.exe"
